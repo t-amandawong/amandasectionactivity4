@@ -8,6 +8,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.js" integrity="sha512-H05oT7BAjM9Ai1IaFX9zr61NtE2e1P0MkTz3AZXBnseaJSAOt2FGMFJ+vVGutaJxEGA1jxUiYsTBYQNE08/Erw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         class Demo extends Phaser.Scene {
+            preload() {
+                this.load.audio('aaa', ['assets/aaa.mp3']);
+            }
+
             create() {
                 this.meep = this.add.text(10,10,'🐁').setOrigin(0.5,0.5);
                 this.input.setDefaultCursor('none');
@@ -42,6 +46,12 @@
                     // spawn a dropping
                     let dropping = this.add.circle(x+10,y+10,2).setFillStyle(0,1);
                     dropping.setDepth(-1); // below the mouse
+
+                    // sound effect
+                    let aaa = this.sound.add('aaa', {
+                        loop: false,
+                    });
+                    aaa.play();
 
                     // shoot away quickly
                     this.tweens.add({
